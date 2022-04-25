@@ -3,4 +3,4 @@
 TODO:
 add notification db entry and jest mock
 
-[Demo](https://open-uea.github.io/parking-management-system/)
+[Demo](https://github.com/open-uea/parking-management-system/tree/style)
