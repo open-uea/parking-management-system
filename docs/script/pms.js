@@ -35,9 +35,19 @@ window.PMS = {
     }),
 
   getDrivers: () =>
-    new Collection("DRIVERS").then((res) => {
-      console.log("\n\n- get all drivers\n", res);
-      return res;
+    new Promise((resolve, reject) => {
+      new Collection("DRIVERS").then((drivers) =>
+        new Collection("PAYMENTS").then((payments) => {
+          const res = drivers.map((driver) => {
+            driver.payments = payments.filter(
+              (p) => p.driverUID === driver.uid
+            );
+            return driver;
+          });
+          console.log("\n\n- get all drivers\n", res);
+          resolve(res);
+        })
+      );
     }),
 
   getLots: () =>
