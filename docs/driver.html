@@ -105,17 +105,100 @@
         <span data-inner-driver-name>n/a</span>
 
         <div class="flex-col">
-          <button class="navigate-btn-request-parking mb-3">
-            Request Parking
-          </button>
-          <button class="navigate-btn-manage-requests mb-3">
+          <button class="navigate-btn-driver-manage-requests-section mb-3">
             Manage Requests
           </button>
-          <button class="navigate-btn-manage-payment mb-3">
+          <button class="navigate-btn-manage-payment-section mb-3">
             Manage Payment
           </button>
-          <button class="navigate-btn-driver-messages mb-3">Messages</button>
-          <button class="navigate-btn-access-lot mb-3">Arrive</button>
+          <button class="navigate-btn-driver-messages-section mb-3">
+            Messages
+          </button>
+          <button class="navigate-btn-access-lot mb-3">Check In</button>
+        </div>
+      </div>
+
+      <!-- driver request management section -->
+      <div
+        id="driver-request-management-section"
+        class="hidden page-section flex-col-center max-dimensions"
+      >
+        <span data-inner-driver-name>n/a</span>
+
+        <div><div class="h2 mb-3">Manage Request</div></div>
+
+        <div class="mb-3">
+          <button id="action-btn-driver-request-registration">
+            New Request
+          </button>
+          <button id="action-btn-driver-request-history">History</button>
+        </div>
+
+        <div id="driver-request-history-tab">
+          <div class="content-injection bordered"></div>
+          <div class="request-color-key-wrapper">
+            <span class="request-color-key request-pending">pending</span>
+            <span class="request-color-key request-accepted">accepted</span>
+            <span class="request-color-key request-rejected">rejected</span>
+            <span class="request-color-key request-used">used</span>
+            <span class="request-color-key request-expired">expired</span>
+          </div>
+        </div>
+
+        <div id="driver-request-registration-tab" class="hidden">
+          <div class="content-injection mb-3"></div>
+
+          <form id="register-form-request" class="bordered">
+            <div class="mb-3 flex-col">
+              <label for="register-form-request-lot-uid"> Parking Lots </label>
+              <select id="register-form-request-lot-uid" name="lot-uid">
+                <option value="">--Please choose an option--</option>
+              </select>
+            </div>
+            <div class="mb-3 flex-col">
+              <label for="register-form-request-payment-uid"> Payment </label>
+              <select id="register-form-request-payment-uid" name="payment-uid">
+                <option value="">--Please choose an option--</option>
+              </select>
+            </div>
+            <div class="mb-3 flex-col">
+              <label for="register-form-request-start"> Start </label>
+              <input
+                id="register-form-request-start"
+                type="datetime-local"
+                name="start"
+              />
+            </div>
+
+            <div class="mb-3 flex-col">
+              <label for="register-form-request-end"> End </label>
+              <input
+                id="register-form-request-end"
+                type="datetime-local"
+                name="end"
+              />
+            </div>
+
+            <div
+              class="register-request-price-container"
+              data-inner-request-cost
+            >
+              <span class="register-request-price-text">£ 0.0</span>
+            </div>
+
+            <div class="mt-3 flex-row-center">
+              <input type="submit" value="Pay" />
+            </div>
+          </form>
+        </div>
+
+        <div id="driver-nav-btn-group">
+          <button class="navigate-btn-manage-payment-section mb-3">
+            Manage Payment
+          </button>
+          <button class="navigate-btn-driver-messages-section mb-3">
+            Messages
+          </button>
         </div>
       </div>
 
@@ -139,33 +222,6 @@
             name="expiry-date"
           />
           <input type="submit" value="register" />
-        </form>
-      </div>
-
-      <!-- request registration section -->
-      <div class="hidden">
-        <form id="register-form-request">
-          <label for="register-form-request-lot-uid"> Parking Lots </label>
-          <select id="register-form-request-lot-uid" name="lot-uid">
-            <option value="">--Please choose an option--</option>
-          </select>
-          <label for="register-form-request-payment-uid"> Payment </label>
-          <select id="register-form-request-payment-uid" name="payment-uid">
-            <option value="">--Please choose an option--</option>
-          </select>
-          <label for="register-form-request-start"> Start </label>
-          <input
-            id="register-form-request-start"
-            type="datetime-local"
-            name="start"
-          />
-          <label for="register-form-request-end"> End </label>
-          <input
-            id="register-form-request-end"
-            type="datetime-local"
-            name="end"
-          />
-          <input type="submit" value="send" />
         </form>
       </div>
 

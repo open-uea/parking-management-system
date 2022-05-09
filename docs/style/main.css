@@ -28,7 +28,9 @@ input[type="submit"] {
   text-transform: capitalize;
 }
 
-button:disabled {
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
@@ -83,14 +85,16 @@ input[type="password"] {
 }
 
 /* ---------- admin styles ---------- */
-#admin-nav-btn-group {
+#admin-nav-btn-group,
+#driver-nav-btn-group {
   position: absolute;
   top: 90%;
   left: 50%;
   display: flex;
   transform: translate(-50%, 0);
 }
-#admin-nav-btn-group > button {
+#admin-nav-btn-group > button,
+#driver-nav-btn-group > button {
   margin: 5px;
 }
 
@@ -195,7 +199,80 @@ input[type="password"] {
   height: 80px;
   border-radius: 50px;
   margin-top: 25px;
-  border: solid 3px slateblue;
+  border: solid 3px cornflowerblue;
+}
+
+.register-request-absent-payment {
+  display: inline-block;
+  border: solid 1px red;
+  background-color: #ff9696;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: white;
+}
+
+.register-request-price-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 700;
+  background-color: white;
+  border: dashed 1px #cbc3c3;
+  border-radius: 5px;
+  height: 75px;
+  text-align: center;
+}
+
+#driver-request-history-tab .content-injection ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#driver-request-history-tab .content-injection li::before,
+.request-color-key::before {
+  display: inline-block;
+  content: "";
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.request-color-key {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.request-color-key-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+#driver-request-history-tab .content-injection [data-state="pending"]::before,
+.request-pending::before {
+  background-color: goldenrod;
+}
+#driver-request-history-tab .content-injection [data-state="accepted"]::before,
+.request-accepted::before {
+  background-color: green;
+}
+#driver-request-history-tab .content-injection [data-state="rejected"]::before,
+.request-rejected::before {
+  background-color: tomato;
+}
+#driver-request-history-tab .content-injection [data-state="used"]::before,
+.request-used::before {
+  background-color: cornflowerblue;
+}
+#driver-request-history-tab .content-injection [data-state="expired"]::before,
+.request-expired::before {
+  background-color: dimgray;
 }
 
 /* ---------- global styles ---------- */
@@ -312,6 +389,27 @@ input[type="password"] {
 
 .hidden {
   display: none !important;
+}
+
+.pulsate {
+  -webkit-animation: pulsate 1.75s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0.5;
+}
+
+@-webkit-keyframes pulsate {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.2;
+  }
 }
 
 @keyframes pms-busy-spinner {
