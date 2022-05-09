@@ -201,17 +201,6 @@ select {
 
 /* ---------- driver styles ---------- */
 
-.landing-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: gray;
-  text-align: center;
-  text-decoration: none;
-  border: solid 3px gray;
-  margin: 10px;
-}
-
 .navigate-btn-check-in,
 .landing-btn {
   font-weight: 600;
@@ -221,6 +210,17 @@ select {
   border-radius: 50px;
   margin-top: 25px;
   border: solid 3px cornflowerblue;
+}
+
+.landing-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+  border: solid 3px gray;
+  margin: 10px;
 }
 
 .navigate-btn-check-in:hover {
