@@ -7,9 +7,10 @@ let thisAdmin,
   thisMessage,
   thisNotificationTimer;
 
-// TODO: remove next line only there for dev
+// // TODO: remove next line only there for dev
 // PMS.getDrivers().then((list) => {
 //   [thisDriver] = list.filter((d) => d.name === "alpha b");
+//   // [thisDriver] = list.filter((d) => d.name === "aa");
 // });
 
 // -- navigation and history handler --
@@ -23,6 +24,7 @@ $(window).on("hashchange", function (_event) {
     $(".navigate-btn-admin-home").removeClass("hidden");
     $(".navigate-btn-driver-home").removeClass("hidden");
     renderSection(hash.replace(/#/, ""));
+    renderUpcomingRequestBanner();
   } else {
     $(".navigate-btn-admin-home").addClass("hidden");
     $(".navigate-btn-driver-home").addClass("hidden");
@@ -206,6 +208,7 @@ $("body").on("click", "#action-btn-driver-request-registration", function () {
   PMS.getPayments().then((list) => {
     const [hasPayment] = list.filter((p) => p.driverUID === thisDriver.uid);
     if (!hasPayment) {
+      $("#driver-request-registration-tab .content-injection").empty();
       $("#driver-request-registration-tab .content-injection").append(
         $("<span>", {
           class: "register-request-absent-payment",
@@ -253,18 +256,47 @@ $("body").on("click", "#action-btn-driver-request-registration", function () {
     $("#driver-request-history-tab").addClass("hidden");
   });
 });
+$("body").on("click", ".navigate-btn-driver-messages-section", function () {
+  PMS.getMessages().then((list) => {
+    const messages = list.filter((msg) => msg.toUserUID === thisDriver.uid);
+    renderMessagesTo(messages, "#driver-messages-section .content-injection");
+    location.hash = "driver-messages-section";
+  });
+});
+$("body").on("click", "#action-btn-driver-new-message", function () {
+  $("#driver-new-message-tab").removeClass("hidden");
+  $("#driver-inbox-messages-tab").addClass("hidden");
+  // preload select options
+  $("#send-form-message-driver-to-user-uid").click();
+});
+$("body").on("click", "#action-btn-driver-inbox-messages", function () {
+  PMS.getMessages().then((list) => {
+    const messages = list.filter((msg) => msg.toUserUID === thisDriver.uid);
+    renderMessagesTo(messages, "#driver-messages-section .content-injection");
+    $("#driver-inbox-messages-tab").removeClass("hidden");
+    $("#driver-new-message-tab").addClass("hidden");
+  });
+});
 
 /////////////////////////////////////////////////////
 //                    forms                       //
 ////////////////////////////////////////////////////
 
 // -- admin registration --
-$("#register-form-admin").submit(async function (event) {
+$("#register-form-admin").submit(function (event) {
   event.preventDefault();
   const name = $("#register-form-admin-name").val();
   const password = $("#register-form-admin-password").val();
-  thisAdmin = await new PMS.Admin({ name, password }).register();
-  console.log(thisAdmin);
+  new PMS.Admin({ name, password })
+    .register()
+    .then((admin) => {
+      thisAdmin = admin;
+      location.hash = "admin-home-section";
+      console.log(thisAdmin);
+    })
+    .catch((error) => {
+      notify(error);
+    });
 });
 
 // -- admin login --
@@ -285,20 +317,27 @@ $("#login-form-admin").submit(function (event) {
 });
 
 // -- driver registration --
-$("#register-form-driver").submit(async function (event) {
+$("#register-form-driver").submit(function (event) {
   event.preventDefault();
   const name = $("#register-form-driver-name").val();
   const email = $("#register-form-driver-email").val();
   const password = $("#register-form-driver-password").val();
-  new PMS.Driver({ name, email, password }).register().then((driver) => {
-    thisDriver = driver;
-    location.hash = "driver-home-section";
-    console.log(thisDriver);
-  });
+  new PMS.Driver({ name, email, password })
+    .register()
+    .then((driver) => {
+      PMS.getDrivers().then((list) => {
+        [thisDriver] = list.filter((d) => d.uid === driver.uid);
+        location.hash = "driver-home-section";
+        console.log(thisDriver);
+      });
+    })
+    .catch((error) => {
+      notify(error);
+    });
 });
 
 // -- driver login --
-$("#login-form-driver").submit(async function (event) {
+$("#login-form-driver").submit(function (event) {
   event.preventDefault();
   const email = $("#login-form-driver-email").val();
   const password = $("#login-form-driver-password").val();
@@ -317,7 +356,7 @@ $("#login-form-driver").submit(async function (event) {
 });
 
 // -- lot registration --
-$("#register-form-lot").submit(async function (event) {
+$("#register-form-lot").submit(function (event) {
   event.preventDefault();
   const name = $("#register-form-lot-name").val();
   const coordinate = $("#register-form-lot-coordinate").val();
@@ -338,7 +377,7 @@ $("#register-form-lot").submit(async function (event) {
 });
 
 // -- request registration --
-$("#register-form-request").submit(async function (event) {
+$("#register-form-request").submit(function (event) {
   event.preventDefault();
   const lotUID = $("#register-form-request-lot-uid").val();
   const paymentUID = $("#register-form-request-payment-uid").val();
@@ -399,21 +438,32 @@ $("#send-form-message-admin").submit(function (event) {
 });
 
 // -- driver message sending --
-$("#send-form-message-driver").submit(async function (event) {
+$("#send-form-message-driver").submit(function (event) {
   event.preventDefault();
   const title = $("#send-form-message-driver-title").val();
   const content = $("#send-form-message-driver-content").val();
-  thisMessage = await new PMS.Message({
-    fromUserUID: thisDriver.uid,
-    toUserUIDS: [thisAdmin.uid],
-    title,
-    content,
-  }).send();
-  console.log(thisMessage);
+  PMS.getAdmins().then((list) => {
+    const adminUIDS = list.map((l) => l.uid);
+    new PMS.Message({
+      fromUserUID: thisDriver.uid,
+      toUserUIDS: adminUIDS,
+      title,
+      content,
+    })
+      .send()
+      .then((message) => {
+        thisMessage = message;
+        notify("-- message sent --");
+        console.log(thisMessage);
+      })
+      .catch((error) => {
+        notify(error);
+      });
+  });
 });
 
 // -- request automate action --
-$("#action-form-admin-requests-selection").submit(async function (event) {
+$("#action-form-admin-requests-selection").submit(function (event) {
   event.preventDefault();
   const $target = $(this);
   let filteredRequests = [];
@@ -582,6 +632,7 @@ function renderMessagesTo(messages, host) {
           }).append([
             $("<span>", { text: contentList[0] }),
             $("<span>", { text: contentList[1] }),
+            $("</br>"),
             $("<span>", { text: contentList[2] }),
             $("<span>", { text: contentList[3] }),
           ]),
@@ -612,6 +663,47 @@ function renderDriverRequestHistoryTo(requests, host) {
     });
   });
   hydrateSection();
+}
+
+function renderUpcomingRequestBanner() {
+  if (thisDriver) {
+    const inner = $("<span>", {
+      class: "upcoming-request-banner-injection",
+      text: "*** Finding upcoming requests  ***",
+    });
+    $("#upcoming-request-banner-wrapper .content-injection").empty();
+    $("#upcoming-request-banner-wrapper .content-injection").addClass(
+      "pulsate"
+    );
+    $("#upcoming-request-banner-wrapper .content-injection").append(inner);
+
+    const requests = thisDriver.requests.filter((r) => r.state === "accepted");
+    const startTimeList = requests.map((r) => new Date(r.start).getTime());
+    const idx = startTimeList.indexOf(Math.min(...startTimeList));
+    if (idx > -1) {
+      thisRequest = requests[idx];
+      thisRequest.toString().then((res) => {
+        $("#upcoming-request-banner-wrapper .content-injection").removeClass(
+          "pulsate"
+        );
+        inner.text(res.match(/-(.*)/)[1]);
+        $(".navigate-btn-check-in").prop("disabled", false);
+        $(".navigate-btn-check-in").on("click", function () {
+          thisRequest.checkIn().then((res) => console.log(res));
+        });
+      });
+    } else {
+      $("#upcoming-request-banner-wrapper .content-injection").removeClass(
+        "pulsate"
+      );
+      inner.text("*** No upcoming requests ***");
+      $(".navigate-btn-check-in").prop("disabled", true);
+      $(".upcoming-request-banner-injection").addClass(
+        "upcoming-request-banner-injection-disabled"
+      );
+    }
+    hydrateSection();
+  }
 }
 // --hydrate page-section --
 function hydrateSection() {

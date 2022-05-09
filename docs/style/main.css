@@ -36,7 +36,9 @@ input[type="submit"]:disabled {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="datetime-local"],
+select {
   width: 300px;
 }
 
@@ -85,16 +87,16 @@ input[type="password"] {
 }
 
 /* ---------- admin styles ---------- */
-#admin-nav-btn-group,
-#driver-nav-btn-group {
+.admin-nav-btn-group,
+.driver-nav-btn-group {
   position: absolute;
   top: 90%;
   left: 50%;
   display: flex;
   transform: translate(-50%, 0);
 }
-#admin-nav-btn-group > button,
-#driver-nav-btn-group > button {
+.admin-nav-btn-group > button,
+.driver-nav-btn-group > button {
   margin: 5px;
 }
 
@@ -162,37 +164,56 @@ input[type="password"] {
   justify-content: space-between;
 }
 
-#admin-messages-section .content-injection {
+#admin-messages-section .content-injection,
+#driver-messages-section .content-injection {
   width: var(--content-width);
   height: 325px;
   overflow: auto;
 }
-#send-form-message-admin {
+#send-form-message-admin,
+#send-form-message-driver {
   display: flex;
   flex-direction: column;
 }
-#admin-messages-section ul {
+#admin-messages-section ul,
+#driver-messages-section ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-#admin-messages-section li {
+#admin-messages-section li,
+#driver-messages-section li {
   cursor: pointer;
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
-  height: 1.1rem;
+  height: 3.1rem;
   overflow: hidden;
 }
-#admin-messages-section li:focus {
+#admin-messages-section li:focus,
+#driver-messages-section li:focus {
   height: auto;
 }
-#admin-messages-section li > span {
+#admin-messages-section li > span,
+#driver-messages-section li > span {
   margin-bottom: 5px;
 }
 
 /* ---------- driver styles ---------- */
-.navigate-btn-access-lot {
+
+.landing-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+  border: solid 3px gray;
+  margin: 10px;
+}
+
+.navigate-btn-check-in,
+.landing-btn {
   font-weight: 600;
   align-self: center;
   width: 80px;
@@ -200,6 +221,13 @@ input[type="password"] {
   border-radius: 50px;
   margin-top: 25px;
   border: solid 3px cornflowerblue;
+}
+
+.navigate-btn-check-in:hover {
+  background-color: cornflowerblue;
+  border: solid 3px blue;
+  color: white;
+  transition: all 0.25s ease-in-out;
 }
 
 .register-request-absent-payment {
@@ -210,6 +238,27 @@ input[type="password"] {
   border-radius: 5px;
   font-size: 12px;
   color: white;
+}
+
+.upcoming-request-banner-injection {
+  display: inline-block;
+  border: solid 1px blue;
+  background-color: cornflowerblue;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: white;
+  margin-bottom: 25px;
+}
+
+.navigate-btn-check-in:disabled,
+.upcoming-request-banner-injection-disabled {
+  color: gray;
+  background-color: lightgray;
+  border: solid 3px gray;
+}
+.upcoming-request-banner-injection-disabled {
+  border: solid 1px gray;
 }
 
 .register-request-price-container {
@@ -225,6 +274,10 @@ input[type="password"] {
   text-align: center;
 }
 
+#driver-request-history-tab .content-injection {
+  height: 300px;
+  width: var(--content-width);
+}
 #driver-request-history-tab .content-injection ul {
   list-style: none;
   margin: 0;
@@ -232,7 +285,8 @@ input[type="password"] {
 }
 
 #driver-request-history-tab .content-injection li::before,
-.request-color-key::before {
+.request-color-key::before,
+.spot-color-key::before {
   display: inline-block;
   content: "";
   width: 10px;
@@ -241,17 +295,29 @@ input[type="password"] {
   border-radius: 50%;
 }
 
-.request-color-key {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.request-color-key-wrapper {
+.request-color-key-wrapper,
+.spot-color-key-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 20px;
   font-weight: 500;
   font-size: 12px;
+}
+
+.spot-color-key-wrapper {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.request-color-key {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.spot-color-key {
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
 #driver-request-history-tab .content-injection [data-state="pending"]::before,
@@ -308,13 +374,16 @@ input[type="password"] {
   margin: 15px;
   border: solid 2px black;
 }
-.grid-elem-spot-id[data-state="opened"] {
+.grid-elem-spot-id[data-state="opened"],
+.spot-opened::before {
   background-color: springgreen;
 }
-.grid-elem-spot-id[data-state="occupied"] {
+.grid-elem-spot-id[data-state="occupied"],
+.spot-occupied::before {
   background-color: tomato;
 }
-.grid-elem-spot-id[data-state="reserved"] {
+.grid-elem-spot-id[data-state="reserved"],
+.spot-reserved::before {
   background-color: yellow;
 }
 .grid-elem-spot-id[data-selected="true"] {
