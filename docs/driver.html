@@ -118,7 +118,12 @@
           <button class="navigate-btn-driver-messages-section mb-3">
             Messages
           </button>
-          <button class="navigate-btn-check-in mb-3" disabled>Check In</button>
+          <button class="navigate-btn-check-in hidden mb-3" disabled>
+            Check In
+          </button>
+          <button class="navigate-btn-check-out hidden mb-3" disabled>
+            Check Out
+          </button>
         </div>
       </div>
 
@@ -144,7 +149,7 @@
             <span class="request-color-key request-pending">pending</span>
             <span class="request-color-key request-accepted">accepted</span>
             <span class="request-color-key request-rejected">rejected</span>
-            <span class="request-color-key request-used">used</span>
+            <span class="request-color-key request-inuse">in-use</span>
             <span class="request-color-key request-expired">expired</span>
           </div>
         </div>
@@ -201,26 +206,52 @@
       </div>
 
       <!-- payment registration section -->
-      <div class="hidden">
-        <form id="register-form-payment">
-          <label for="register-form-payment-name"> Name </label>
-          <input id="register-form-payment-name" type="text" name="name" />
-          <label for="register-form-payment-card-no"> Card No. </label>
-          <input
-            id="register-form-payment-card-no"
-            type="text"
-            name="card-no"
-          />
-          <label for="register-form-payment-ccv"> CCV </label>
-          <input id="register-form-payment-ccv" type="text" name="ccv" />
-          <label for="register-form-payment-expiry-date"> Expiry Date </label>
-          <input
-            id="register-form-payment-expiry-date"
-            type="month"
-            name="expiry-date"
-          />
-          <input type="submit" value="register" />
+      <div
+        id="driver-payment-management-section"
+        class="hidden page-section flex-col-center max-dimensions"
+      >
+        <span data-inner-driver-name>n/a</span>
+
+        <div class="h2 mb-3">Manage Payments</div>
+
+        <div class="content-injection mb-3 bordered"></div>
+
+        <form id="register-form-payment" class="flex-col bordered">
+          <div class="flex-col mb-3">
+            <label for="register-form-payment-name"> Name </label>
+            <input id="register-form-payment-name" type="text" name="name" />
+          </div>
+          <div class="flex-col mb-3">
+            <label for="register-form-payment-card-no"> Card No. </label>
+            <input
+              id="register-form-payment-card-no"
+              type="text"
+              name="card-no"
+            />
+          </div>
+          <div class="flex-col mb-3">
+            <label for="register-form-payment-ccv"> CCV </label>
+            <input id="register-form-payment-ccv" type="text" name="ccv" />
+          </div>
+          <div class="flex-col mb-3">
+            <label for="register-form-payment-expiry-date"> Expiry Date </label>
+            <input
+              id="register-form-payment-expiry-date"
+              type="month"
+              name="expiry-date"
+            />
+          </div>
+          <input type="submit" value="add" />
         </form>
+
+        <div class="driver-nav-btn-group">
+          <button class="navigate-btn-driver-manage-requests-section mb-3">
+            Manage Requests
+          </button>
+          <button class="navigate-btn-driver-messages-section mb-3">
+            Messages
+          </button>
+        </div>
       </div>
 
       <!-- Driver message section -->
@@ -274,14 +305,14 @@
       </div>
 
       <!-- helpers -->
-      <div id="notification"></div>
-      <div id="busy-spinner" class="hidden"></div>
       <button
         class="hidden navigate-btn-driver-home"
         onclick="javascript:location.hash='driver-home-section'"
       >
         Home
       </button>
+      <div id="busy-spinner" class="hidden"></div>
+      <div id="notification"></div>
     </div>
 
     <script type="module" src="script/pms.js"></script>
