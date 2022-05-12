@@ -160,13 +160,21 @@
           <form id="register-form-request" class="flex-col">
             <div class="mb-3 flex-col">
               <label for="register-form-request-lot-uid"> Parking Lots </label>
-              <select id="register-form-request-lot-uid" name="lot-uid">
+              <select
+                id="register-form-request-lot-uid"
+                name="lot-uid"
+                required
+              >
                 <option value="">--Please choose an option--</option>
               </select>
             </div>
             <div class="mb-3 flex-col">
               <label for="register-form-request-payment-uid"> Payment </label>
-              <select id="register-form-request-payment-uid" name="payment-uid">
+              <select
+                id="register-form-request-payment-uid"
+                name="payment-uid"
+                required
+              >
                 <option value="">--Please choose an option--</option>
               </select>
             </div>
@@ -176,6 +184,7 @@
                 id="register-form-request-start"
                 type="datetime-local"
                 name="start"
+                required
               />
             </div>
             <div class="mb-3 flex-col">
@@ -184,6 +193,7 @@
                 id="register-form-request-end"
                 type="datetime-local"
                 name="end"
+                required
               />
             </div>
             <div
@@ -219,7 +229,12 @@
         <form id="register-form-payment" class="flex-col bordered">
           <div class="flex-col mb-3">
             <label for="register-form-payment-name"> Name </label>
-            <input id="register-form-payment-name" type="text" name="name" />
+            <input
+              id="register-form-payment-name"
+              type="text"
+              name="name"
+              required
+            />
           </div>
           <div class="flex-col mb-3">
             <label for="register-form-payment-card-no"> Card No. </label>
@@ -227,11 +242,17 @@
               id="register-form-payment-card-no"
               type="text"
               name="card-no"
+              required
             />
           </div>
           <div class="flex-col mb-3">
             <label for="register-form-payment-ccv"> CCV </label>
-            <input id="register-form-payment-ccv" type="text" name="ccv" />
+            <input
+              id="register-form-payment-ccv"
+              type="text"
+              name="ccv"
+              required
+            />
           </div>
           <div class="flex-col mb-3">
             <label for="register-form-payment-expiry-date"> Expiry Date </label>
@@ -239,6 +260,7 @@
               id="register-form-payment-expiry-date"
               type="month"
               name="expiry-date"
+              required
             />
           </div>
           <input type="submit" value="add" />
@@ -280,6 +302,7 @@
                 id="send-form-message-driver-title"
                 name="title"
                 type="text"
+                required
               />
             </div>
             <div class="flex-col mb-3">
@@ -289,6 +312,7 @@
                 cols="30"
                 rows="5"
                 name="content"
+                required
               ></textarea>
             </div>
             <input type="submit" value="send" />
