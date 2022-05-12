@@ -26,6 +26,7 @@
       <form class="flex-col" id="register-form-admin">
         <label class="mb-3 mt-3" for="register-form-admin-name"> Name </label>
         <input
+          required
           class="mb-3"
           id="register-form-admin-name"
           type="text"
@@ -35,13 +36,14 @@
           Password
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-admin-password"
           type="password"
           name="password"
           autocomplete
         />
-        <input class="mb-3" type="submit" value="register" />
+        <input required class="mb-3" type="submit" value="register" />
       </form>
 
       <hr />
@@ -51,6 +53,7 @@
       <form class="flex-col" id="login-form-admin">
         <label class="mb-3 mt-3" for="login-form-admin-name"> Name </label>
         <input
+          required
           class="mb-3"
           id="login-form-admin-name"
           name="name"
@@ -60,13 +63,14 @@
           Password
         </label>
         <input
+          required
           class="mb-3"
           id="login-form-admin-password"
           type="password"
           name="password"
           autocomplete
         />
-        <input class="mb-3" type="submit" value="login" />
+        <input required class="mb-3" type="submit" value="login" />
       </form>
 
       <hr />
@@ -76,6 +80,7 @@
       <form class="flex-col" id="register-form-driver">
         <label class="mb-3 mt-3" for="register-form-driver-name"> Name </label>
         <input
+          required
           class="mb-3"
           id="register-form-driver-name"
           type="text"
@@ -85,6 +90,7 @@
           Email
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-driver-email"
           type="email"
@@ -94,13 +100,14 @@
           Password
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-driver-password"
           type="password"
           name="password"
           autocomplete
         />
-        <input class="mb-3" type="submit" value="register" />
+        <input required class="mb-3" type="submit" value="register" />
       </form>
 
       <hr />
@@ -110,6 +117,7 @@
       <form class="flex-col" id="login-form-driver">
         <label class="mb-3 mt-3" for="login-form-driver-email"> Email </label>
         <input
+          required
           class="mb-3"
           id="login-form-driver-email"
           type="email"
@@ -119,13 +127,14 @@
           Password
         </label>
         <input
+          required
           class="mb-3"
           id="login-form-driver-password"
           type="password"
           name="password"
           autocomplete
         />
-        <input class="mb-3" type="submit" value="login" />
+        <input required class="mb-3" type="submit" value="login" />
       </form>
 
       <hr />
@@ -135,6 +144,7 @@
       <form class="flex-col" id="register-form-lot">
         <label class="mb-3 mt-3" for="register-form-lot-name"> Name </label>
         <input
+          required
           class="mb-3"
           id="register-form-lot-name"
           type="text"
@@ -144,6 +154,7 @@
           Coordinate
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-lot-coordinate"
           type="text"
@@ -153,12 +164,13 @@
           Capacity
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-lot-capacity"
           type="number"
           name="capacity"
         />
-        <input class="mb-3" type="submit" value="register" />
+        <input required class="mb-3" type="submit" value="register" />
       </form>
 
       <hr />
@@ -172,6 +184,7 @@
       <form class="flex-col" id="register-form-payment">
         <label class="mb-3 mt-3" for="register-form-payment-name"> Name </label>
         <input
+          required
           class="mb-3"
           id="register-form-payment-name"
           type="text"
@@ -181,6 +194,7 @@
           Card No.
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-payment-card-no"
           type="text"
@@ -188,6 +202,7 @@
         />
         <label class="mb-3 mt-3" for="register-form-payment-ccv"> CCV </label>
         <input
+          required
           class="mb-3"
           id="register-form-payment-ccv"
           type="text"
@@ -197,12 +212,13 @@
           Expiry Date
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-payment-expiry-date"
           type="month"
           name="expiry-date"
         />
-        <input class="mb-3" type="submit" value="register" />
+        <input required class="mb-3" type="submit" value="register" />
       </form>
 
       <hr />
@@ -230,6 +246,7 @@
           Start
         </label>
         <input
+          required
           class="mb-3"
           id="register-form-request-start"
           type="datetime-local"
@@ -237,12 +254,13 @@
         />
         <label class="mb-3 mt-3" for="register-form-request-end"> End </label>
         <input
+          required
           class="mb-3"
           id="register-form-request-end"
           type="datetime-local"
           name="end"
         />
-        <input class="mb-3" type="submit" value="send" />
+        <input required class="mb-3" type="submit" value="send" />
       </form>
 
       <hr />
@@ -268,6 +286,7 @@
           Title
         </label>
         <input
+          required
           class="mb-3"
           id="send-form-message-admin-title"
           name="title"
@@ -283,7 +302,7 @@
           rows="5"
           name="content"
         ></textarea>
-        <input class="mb-3" type="submit" value="send" />
+        <input required class="mb-3" type="submit" value="send" />
       </form>
 
       <hr />
@@ -300,6 +319,7 @@
           Title
         </label>
         <input
+          required
           class="mb-3"
           id="send-form-message-driver-title"
           name="title"
@@ -315,7 +335,7 @@
           rows="5"
           name="content"
         ></textarea>
-        <input class="mb-3" type="submit" value="send" />
+        <input required class="mb-3" type="submit" value="send" />
       </form>
 
       <hr />
