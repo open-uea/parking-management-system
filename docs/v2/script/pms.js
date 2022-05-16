@@ -7,8 +7,8 @@ import {
   Message,
   Collection,
   P,
-} from "../../dist/index.modern.js";
-// } from "../script/index.modern.js";
+  // } from "../../dist/index.modern.js";
+} from "../script/index.modern.js";
 
 P.BEFORE_FETCH = function () {
   const spinner = document.getElementById("busy-spinner");
