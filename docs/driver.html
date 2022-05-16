@@ -5,19 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');</style>
     <link rel="stylesheet" href="style/main.css" />
     <title>PMS - driver</title>
   </head>
   <body>
+    <img class="logo" src="public/images/logo.png" alt="University Of East Anglia Logo">
     <div class="container">
       <!-- driver login section -->
       <div
         id="driver-login-section"
         class="page-section max-dimensions flex-col-center"
       >
-        <div><div class="h2 mb-3">Sign In</div></div>
+        <div><div class="headerText">Sign In</div></div>
 
-        <form id="login-form-driver" class="bordered">
+        <form id="login-form-driver" class="form">
           <div class="mb-3 flex-col">
             <label for="login-form-driver-email"> Email </label>
             <input
@@ -38,11 +40,11 @@
             />
           </div>
           <div class="mt-3 flex-row-center">
-            <input class="m-3" type="submit" value="login" />
+            <input class="m-3 button" type="submit" value="Login" />
             <input
-              class="m-3"
+              class="m-3 button"
               type="button"
-              value="new user"
+              value="New User"
               onclick="javascript:location.hash='driver-register-section'"
             />
           </div>
@@ -102,26 +104,26 @@
         id="driver-home-section"
         class="hidden page-section flex-col-center max-dimensions"
       >
-        <span data-inner-driver-name>n/a</span>
+        <span class="text" data-inner-driver-name>n/a</span>
 
         <div id="upcoming-request-banner-wrapper">
           <div class="content-injection"></div>
         </div>
 
         <div class="flex-col">
-          <button class="navigate-btn-driver-manage-requests-section mb-3">
+          <button class="navigate-btn-driver-manage-requests-section mb-3 button">
             Manage Requests
           </button>
-          <button class="navigate-btn-manage-payment-section mb-3">
+          <button class="navigate-btn-manage-payment-section mb-3 button">
             Manage Payment
           </button>
-          <button class="navigate-btn-driver-messages-section mb-3">
+          <button class="navigate-btn-driver-messages-section mb-3 button">
             Messages
           </button>
-          <button class="navigate-btn-check-in hidden mb-3" disabled>
+          <button class="navigate-btn-check-in hidden mb-3 button" disabled>
             Check In
           </button>
-          <button class="navigate-btn-check-out hidden mb-3" disabled>
+          <button class="navigate-btn-check-out hidden mb-3 button" disabled>
             Check Out
           </button>
         </div>
@@ -134,7 +136,7 @@
       >
         <span data-inner-driver-name>n/a</span>
 
-        <div><div class="h2 mb-3">Manage Request</div></div>
+        <div><div class="mb-3 headerText">Manage Request</div></div>
 
         <div class="mb-3">
           <button id="action-btn-driver-request-registration">
@@ -144,8 +146,8 @@
         </div>
 
         <div id="driver-request-history-tab">
-          <div class="content-injection bordered"></div>
-          <div class="request-color-key-wrapper">
+          <div class="content-injection form noTransformText"></div>
+          <div class="request-color-key-wrapper noTransformText">
             <span class="request-color-key request-pending">pending</span>
             <span class="request-color-key request-accepted">accepted</span>
             <span class="request-color-key request-rejected">rejected</span>
@@ -154,7 +156,7 @@
           </div>
         </div>
 
-        <div id="driver-request-registration-tab" class="hidden bordered">
+        <div id="driver-request-registration-tab" class="hidden form">
           <div class="content-injection flex-col mb-3"></div>
 
           <form id="register-form-request" class="flex-col">
@@ -222,11 +224,11 @@
       >
         <span data-inner-driver-name>n/a</span>
 
-        <div class="h2 mb-3">Manage Payments</div>
+        <div class="mb-3 headerText">Manage Payments</div>
 
-        <div class="content-injection mb-3 bordered"></div>
+        <div class="content-injection mb-3 form"></div>
 
-        <form id="register-form-payment" class="flex-col bordered">
+        <form id="register-form-payment" class="flex-col form">
           <div class="flex-col mb-3">
             <label for="register-form-payment-name"> Name </label>
             <input
@@ -263,7 +265,7 @@
               required
             />
           </div>
-          <input type="submit" value="add" />
+          <input type="submit" value="Add" />
         </form>
 
         <div class="driver-nav-btn-group">
@@ -283,7 +285,7 @@
       >
         <span data-inner-driver-name>n/a</span>
 
-        <div class="h2 mb-3">Driver Messages</div>
+        <div class="mb-3 headerText">Driver Messages</div>
 
         <div class="mb-3">
           <button id="action-btn-driver-new-message">New Message</button>
@@ -291,10 +293,10 @@
         </div>
 
         <div id="driver-inbox-messages-tab">
-          <div class="content-injection bordered"></div>
+          <div class="content-injection form"></div>
         </div>
 
-        <div id="driver-new-message-tab" class="hidden bordered">
+        <div id="driver-new-message-tab" class="hidden form">
           <form id="send-form-message-driver">
             <div class="flex-col mb-3">
               <label for="send-form-message-driver-title"> Title </label>
@@ -315,7 +317,7 @@
                 required
               ></textarea>
             </div>
-            <input type="submit" value="send" />
+            <input type="submit" value="Send" />
           </form>
         </div>
         <div class="driver-nav-btn-group">
@@ -330,7 +332,7 @@
 
       <!-- helpers -->
       <button
-        class="hidden navigate-btn-driver-home"
+        class="hidden navigate-btn-driver-home button"
         onclick="javascript:location.hash='driver-home-section'"
       >
         Home
