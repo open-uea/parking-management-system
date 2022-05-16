@@ -1,5 +1,5 @@
 import { C } from "./Constants";
-import { Api, IApiProps } from "./Api";
+import { Api } from "./Api";
 import { Admin } from "./Admin";
 import { Driver } from "./Driver";
 import { Lot } from "./Lot";
@@ -19,19 +19,19 @@ const CLS = {
 };
 
 export class Collection extends Api {
-  constructor(dbTable: IApiProps["ORM"]) {
+  constructor(dbTable) {
     super();
     this.ORM = dbTable;
     this.constructor = CLS[dbTable];
   }
 
-  then<T>(func: (arg: T[]) => T[]) {
-    return new Promise<T[]>((resolve, reject) => {
+  then(func) {
+    return new Promise((resolve, reject) => {
       this.fetch({
         endpoint: C.API_ENDPOINT_GET_ALL + this.parseQuery({ table: this.ORM }),
         method: "GET",
       })
-        .then((dtoList) => this.deserializeArray<T>(dtoList))
+        .then((dtoList) => this.deserializeArray(dtoList))
         .then((list) => resolve(func(list)))
         .catch((error) => reject(error));
     });

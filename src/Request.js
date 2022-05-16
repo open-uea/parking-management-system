@@ -4,37 +4,8 @@ import { Lot } from "./Lot";
 import { Payment } from "./Payment";
 import { Driver } from "./Driver";
 
-interface IRequestProps {
-  uid: string;
-  start: string;
-  end: string;
-  lotUID: string;
-  paymentUID: string;
-  spotType: C.SPOT_TYPE_STANDARD;
-  state:
-    | C.REQUEST_PENDING
-    | C.REQUEST_ACCEPTED
-    | C.REQUEST_REJECTED
-    | C.REQUEST_IN_USE
-    | C.REQUEST_EXPIRED;
-}
-
 export class Request extends Manage {
-  start: IRequestProps["start"];
-  end: IRequestProps["end"];
-  state: IRequestProps["state"];
-  spotType: IRequestProps["spotType"];
-  lotUID: IRequestProps["lotUID"];
-  paymentUID: IRequestProps["paymentUID"];
-
-  constructor({
-    lotUID,
-    paymentUID,
-    start,
-    end,
-    spotType,
-    uid,
-  }: Partial<IRequestProps> = {}) {
+  constructor({ lotUID, paymentUID, start, end, spotType, uid } = {}) {
     super(uid);
     this.lotUID = lotUID;
     this.paymentUID = paymentUID;
@@ -45,13 +16,13 @@ export class Request extends Manage {
     this.end = new Date(end).toString();
   }
 
-  modify({ state }: Partial<IRequestProps> = {}) {
+  modify({ state } = {}) {
     this.state = state || this.state;
-    return this.put<Request>({ uid: this.uid });
+    return this.put({ uid: this.uid });
   }
 
   send() {
-    return this.post<Request>();
+    return this.post();
   }
 
   accept() {
@@ -63,9 +34,9 @@ export class Request extends Manage {
   }
 
   automate() {
-    return new Promise<Request>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       new Lot()
-        .get<Lot>({ uid: this.lotUID })
+        .get({ uid: this.lotUID })
         .then((lot) => {
           const num = lot.isTypeAvailable({ type: this.spotType });
           if (num) {
@@ -91,7 +62,7 @@ export class Request extends Manage {
       this.modify()
         .then((request) => {
           new Lot()
-            .get<Lot>({ uid: request.lotUID })
+            .get({ uid: request.lotUID })
             .then((lot) => resolve(lot.occupyRandomSpot()));
         })
         .catch((error) => reject(error));
@@ -104,7 +75,7 @@ export class Request extends Manage {
       this.modify()
         .then((request) => {
           new Lot()
-            .get<Lot>({ uid: request.lotUID })
+            .get({ uid: request.lotUID })
             .then((lot) => resolve(lot.releaseRandomSpot()));
         })
         .catch((error) => reject(error));
@@ -112,16 +83,16 @@ export class Request extends Manage {
   }
 
   toString() {
-    return new Promise<string>((resolve) => {
+    return new Promise((resolve) => {
       Promise.all([
         new Payment()
-          .get<Payment>({ uid: this.paymentUID })
+          .get({ uid: this.paymentUID })
           .then((payment) =>
             new Driver()
-              .get<Driver>({ uid: payment.driverUID })
+              .get({ uid: payment.driverUID })
               .then((driver) => driver)
           ),
-        new Lot().get<Lot>({ uid: this.lotUID }).then((lot) => lot),
+        new Lot().get({ uid: this.lotUID }).then((lot) => lot),
       ])
         .then(([driver, lot]) => {
           resolve(

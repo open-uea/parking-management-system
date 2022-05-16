@@ -5,7 +5,7 @@
   "author": "Owusu K",
   "license": "MIT",
   "type": "module",
-  "source": "src/index.ts",
+  "source": "src/index.js",
   "exports": "./dist/index.modern.js",
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",

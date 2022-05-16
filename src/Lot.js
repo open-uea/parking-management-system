@@ -1,26 +1,8 @@
 import { C } from "./Constants";
 import { Manage } from "./Manage";
 
-interface ISpotProps {
-  uid: string;
-  type: C.SPOT_TYPE_STANDARD;
-  state: C.SPOT_STATE_OPENED | C.SPOT_STATE_RESERVED | C.SPOT_STATE_OCCUPIED;
-}
-interface ILotProps {
-  uid: string;
-  name: string;
-  coordinate: string;
-  capacity: number;
-  spots: ISpotProps[];
-  state: C.LOT_STATE_OPENED | C.LOT_STATE_CLOSED;
-}
 export class Lot extends Manage {
-  name: ILotProps["name"];
-  state: ILotProps["state"];
-  spots: ILotProps["spots"];
-  coordinate: ILotProps["coordinate"];
-
-  constructor({ name, coordinate, capacity, uid }: Partial<ILotProps> = {}) {
+  constructor({ name, coordinate, capacity, uid } = {}) {
     super(uid);
     this.name = name;
     this.coordinate = coordinate;
@@ -29,16 +11,16 @@ export class Lot extends Manage {
     this.spots = this._instSpots({ capacity });
   }
 
-  modify({ name, coordinate, state, spots }: Partial<ILotProps> = {}) {
+  modify({ name, coordinate, state, spots } = {}) {
     this.coordinate = coordinate || this.coordinate;
     this.name = name || this.name;
     this.state = state || this.state;
     this.spots = spots || this.spots;
-    return this.put<Lot>({ uid: this.uid });
+    return this.put({ uid: this.uid });
   }
 
   register() {
-    return this.post<Lot>();
+    return this.post();
   }
 
   isTypeAvailable({ type }) {
@@ -108,7 +90,7 @@ export class Lot extends Manage {
   }
 
   _instSpots({ capacity }) {
-    let list: ISpotProps[] = [];
+    let list = [];
     for (let i = 0; i < capacity; i++) {
       list.push({
         uid: Math.random().toString(16).slice(2),

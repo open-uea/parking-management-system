@@ -3,27 +3,7 @@ import { Manage } from "./Manage";
 import { Admin } from "./Admin";
 import { Driver } from "./Driver";
 
-interface IMessageProps {
-  uid: string;
-  toUserUID: string;
-  toUserUIDS: string[];
-  fromUserUID: string;
-  replyToRef: string;
-  timestamp: string;
-  title: string;
-  content: string;
-  state: C.MESSAGE_STATE_DELIVERED | C.MESSAGE_STATE_READ;
-}
-
 export class Message extends Manage {
-  toUserUID: IMessageProps["toUserUID"];
-  fromUserUID: IMessageProps["fromUserUID"];
-  replyToRef: IMessageProps["replyToRef"];
-  timestamp: IMessageProps["timestamp"];
-  title: IMessageProps["title"];
-  content: IMessageProps["content"];
-  state: IMessageProps["state"];
-
   constructor({
     toUserUID,
     toUserUIDS,
@@ -33,7 +13,7 @@ export class Message extends Manage {
     title,
     content,
     uid,
-  }: Partial<IMessageProps> = {}) {
+  } = {}) {
     super(uid);
     this.mem = toUserUIDS || [toUserUID];
     this.toUserUID = toUserUID;
@@ -46,9 +26,9 @@ export class Message extends Manage {
     this.state = C.MESSAGE_STATE_DELIVERED;
   }
 
-  modify({ state }: Partial<IMessageProps> = {}) {
+  modify({ state } = {}) {
     this.state = state || this.state;
-    return this.put<Message>({ uid: this.uid });
+    return this.put({ uid: this.uid });
   }
 
   send() {
@@ -62,21 +42,21 @@ export class Message extends Manage {
           content: this.content,
           replyToRef: this.replyToRef,
           timestamp: this.timestamp || new Date(Date.now()).toISOString(),
-        }).post<Message>()
+        }).post()
       );
     }
     return Promise.all(result);
   }
 
   toString() {
-    return new Promise<string[]>((resolve) => {
+    return new Promise((resolve) => {
       Promise.all([
         new Admin()
-          .get<Admin>({ uid: this.fromUserUID })
+          .get({ uid: this.fromUserUID })
           .then((driver) => driver)
           .catch(() => null),
         new Driver()
-          .get<Driver>({ uid: this.fromUserUID })
+          .get({ uid: this.fromUserUID })
           .then((driver) => driver)
           .catch(() => null),
       ])

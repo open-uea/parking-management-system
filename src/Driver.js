@@ -1,21 +1,8 @@
 import { C } from "./Constants";
 import { Manage } from "./Manage";
 
-interface IDriverProps {
-  uid: string;
-  name: string;
-  email: string;
-  password: string;
-  state: C.DRIVER_STATE_ACTIVE | C.DRIVER_STATE_BANNED;
-}
-
 export class Driver extends Manage {
-  name: IDriverProps["name"];
-  email: IDriverProps["email"];
-  password: IDriverProps["password"];
-  state: IDriverProps["state"];
-
-  constructor({ name, email, password, uid }: Partial<IDriverProps> = {}) {
+  constructor({ name, email, password, uid } = {}) {
     super(uid);
     this.name = name;
     this.email = email;
@@ -24,20 +11,20 @@ export class Driver extends Manage {
     this.ORM = C.ORM_DRIVERS;
   }
 
-  modify({ name, email, password, state }: Partial<IDriverProps> = {}) {
+  modify({ name, email, password, state } = {}) {
     this.name = name || this.name;
     this.email = email || this.email;
     this.state = state || this.state;
     this.password = password || this.password;
-    return this.put<Driver>({ uid: this.uid });
+    return this.put({ uid: this.uid });
   }
 
   register() {
-    return this.post<Driver>();
+    return this.post();
   }
 
   login() {
-    return this.auth<Driver>();
+    return this.auth();
   }
 
   recover() {

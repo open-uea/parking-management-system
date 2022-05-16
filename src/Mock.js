@@ -112,7 +112,7 @@ class Mock {
   }
 
   _getFromJSONBin() {
-    fetch("https://api.jsonbin.io/b/6266ff3b019db4679691967c", {
+    fetch("https://api.jsonbin.io/b/6281e66d25069545a337fa27", {
       method: "GET",
       headers: {
         versioning: false,
@@ -141,7 +141,7 @@ class Mock {
       endpoint === C.API_ENDPOINT_DELETE
     ) {
       return new Promise((resolve, reject) => {
-        fetch("https://api.jsonbin.io/b/6266ff3b019db4679691967c", {
+        fetch("https://api.jsonbin.io/b/6281e66d25069545a337fa27", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

@@ -1,18 +1,14 @@
 import { C } from "./Constants";
 import { Api } from "./Api";
 
-interface IPointer {
-  [key: string]: string;
-}
-
 export class Manage extends Api {
-  constructor(uid: string) {
+  constructor(uid) {
     super(uid);
   }
 
-  protected recoverEmail() {
+  recoverEmail() {
     if (this.ORM === C.ORM_DRIVERS) {
-      return new Promise<boolean>((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         this.fetch({
           body: this.serialize(this),
           endpoint:
@@ -27,15 +23,15 @@ export class Manage extends Api {
     }
   }
 
-  protected auth<T>() {
+  auth() {
     if (this.ORM === C.ORM_ADMINS || this.ORM === C.ORM_DRIVERS) {
-      return new Promise<T>((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         this.fetch({
           body: this.serialize(this),
           endpoint: C.API_ENDPOINT_AUTH + this.parseQuery({ table: this.ORM }),
           method: "POST",
         })
-          .then((dto) => resolve(this.deserialize<T>(dto)))
+          .then((dto) => resolve(this.deserialize(dto)))
           .catch((error) => reject(error));
       });
     } else {
@@ -43,45 +39,45 @@ export class Manage extends Api {
     }
   }
 
-  protected post<T>() {
-    return new Promise<T>((resolve, reject) => {
+  post() {
+    return new Promise((resolve, reject) => {
       this.fetch({
         body: this.serialize(this),
         endpoint: C.API_ENDPOINT_POST + this.parseQuery({ table: this.ORM }),
         method: "POST",
       })
-        .then((dto) => resolve(this.deserialize<T>(dto)))
+        .then((dto) => resolve(this.deserialize(dto)))
         .catch((error) => reject(error));
     });
   }
 
-  protected put<T>(pointer: IPointer) {
-    return new Promise<T>((resolve, reject) => {
+  put(pointer) {
+    return new Promise((resolve, reject) => {
       this.fetch({
         body: this.serialize(this),
         endpoint:
           C.API_ENDPOINT_PUT + this.parseQuery({ ...pointer, table: this.ORM }),
         method: "PUT",
       })
-        .then((dto) => resolve(this.deserialize<T>(dto)))
+        .then((dto) => resolve(this.deserialize(dto)))
         .catch((error) => reject(error));
     });
   }
 
-  get<T>(pointer: IPointer) {
-    return new Promise<T>((resolve, reject) => {
+  get(pointer) {
+    return new Promise((resolve, reject) => {
       this.fetch({
         endpoint:
           C.API_ENDPOINT_GET + this.parseQuery({ ...pointer, table: this.ORM }),
         method: "GET",
       })
-        .then((dto) => resolve(this.deserialize<T>(dto)))
+        .then((dto) => resolve(this.deserialize(dto)))
         .catch((error) => reject(error));
     });
   }
 
-  delete(pointer: IPointer) {
-    return new Promise<boolean>((resolve, reject) => {
+  delete(pointer) {
+    return new Promise((resolve, reject) => {
       this.fetch({
         endpoint:
           C.API_ENDPOINT_DELETE +

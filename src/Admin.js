@@ -1,39 +1,28 @@
 import { C } from "./Constants";
 import { Manage } from "./Manage";
 
-interface IAdminProps {
-  uid: string;
-  name: string;
-  password: string;
-  state: C.ADMIN_STATE_ONLINE | C.ADMIN_STATE_OFFLINE;
-}
-
 export class Admin extends Manage {
-  name: IAdminProps["name"];
-  password: IAdminProps["password"];
-  state: IAdminProps["state"];
-
-  constructor({ name, password, uid }: Partial<IAdminProps> = {}) {
+  constructor({ name, password, uid } = {}) {
     super(uid);
     this.name = name;
     this.password = password;
     this.ORM = C.ORM_ADMINS;
   }
 
-  modify({ name, password, state }: Partial<IAdminProps> = {}) {
+  modify({ name, password, state } = {}) {
     this.name = name || this.name;
     this.state = state || this.state;
     this.password = password || this.password;
-    return this.put<Admin>({ uid: this.uid });
+    return this.put({ uid: this.uid });
   }
 
   register() {
-    return this.post<Admin>();
+    return this.post();
   }
 
   login() {
     return new Promise((resolve, reject) => {
-      this.auth<Admin>()
+      this.auth()
         .then((admin) => resolve(admin.modify({ state: C.ADMIN_STATE_ONLINE })))
         .catch((error) => reject(error));
     });
