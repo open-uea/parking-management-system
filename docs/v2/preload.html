@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PMS - preload</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link rel="stylesheet" href="style/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2 style="text-align: center">Preload Database</h2>
+      <p>
+        To see what is happening open up console. For Chrome browser you can
+        right click here and select "inspect" then find the "console" tab<br />Anytime
+        you submit a form feedback will be shown in the console<br />There are
+        some feedback buttons at the bottom of this page scroll down to find
+        them.
+      </p>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong><br />register admin[only one admin is needed]<br /></strong>
+      <form class="flex-col" id="register-form-admin">
+        <label class="mb-3 mt-3" for="register-form-admin-name"> Name </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-admin-name"
+          type="text"
+          name="name"
+        />
+        <label class="mb-3 mt-3" for="register-form-admin-password">
+          Password
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-admin-password"
+          type="password"
+          name="password"
+          autocomplete
+        />
+        <input required class="mb-3" type="submit" value="register" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong><br />login admin<br /></strong>
+      <form class="flex-col" id="login-form-admin">
+        <label class="mb-3 mt-3" for="login-form-admin-name"> Name </label>
+        <input
+          required
+          class="mb-3"
+          id="login-form-admin-name"
+          name="name"
+          type="text"
+        />
+        <label class="mb-3 mt-3" for="login-form-admin-password">
+          Password
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="login-form-admin-password"
+          type="password"
+          name="password"
+          autocomplete
+        />
+        <input required class="mb-3" type="submit" value="login" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong><br />register driver<br /></strong>
+      <form class="flex-col" id="register-form-driver">
+        <label class="mb-3 mt-3" for="register-form-driver-name"> Name </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-driver-name"
+          type="text"
+          name="name"
+        />
+        <label class="mb-3 mt-3" for="register-form-driver-email">
+          Email
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-driver-email"
+          type="email"
+          name="email"
+        />
+        <label class="mb-3 mt-3" for="register-form-driver-password">
+          Password
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-driver-password"
+          type="password"
+          name="password"
+          autocomplete
+        />
+        <input required class="mb-3" type="submit" value="register" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong><br />login driver<br /></strong>
+      <form class="flex-col" id="login-form-driver">
+        <label class="mb-3 mt-3" for="login-form-driver-email"> Email </label>
+        <input
+          required
+          class="mb-3"
+          id="login-form-driver-email"
+          type="email"
+          name="email"
+        />
+        <label class="mb-3 mt-3" for="login-form-driver-password">
+          Password
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="login-form-driver-password"
+          type="password"
+          name="password"
+          autocomplete
+        />
+        <input required class="mb-3" type="submit" value="login" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong><br />register lot [login as admin first]<br /></strong>
+      <form class="flex-col" id="register-form-lot">
+        <label class="mb-3 mt-3" for="register-form-lot-name"> Name </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-lot-name"
+          type="text"
+          name="name"
+        />
+        <label class="mb-3 mt-3" for="register-form-lot-coordinate">
+          Coordinate
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-lot-coordinate"
+          type="text"
+          name="coordinate"
+        />
+        <label class="mb-3 mt-3" for="register-form-lot-capacity">
+          Capacity
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-lot-capacity"
+          type="number"
+          name="capacity"
+        />
+        <input required class="mb-3" type="submit" value="register" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong>
+        <br />register payment [login as existing driver first] <br />payment
+        will be assigned to currently logged in driver <br />to assign to
+        specific driver use the above driver login to login specific driver
+      </strong>
+      <form class="flex-col" id="register-form-payment">
+        <label class="mb-3 mt-3" for="register-form-payment-name"> Name </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-payment-name"
+          type="text"
+          name="name"
+        />
+        <label class="mb-3 mt-3" for="register-form-payment-card-no">
+          Card No.
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-payment-card-no"
+          type="text"
+          name="card-no"
+        />
+        <label class="mb-3 mt-3" for="register-form-payment-ccv"> CCV </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-payment-ccv"
+          type="text"
+          name="ccv"
+        />
+        <label class="mb-3 mt-3" for="register-form-payment-expiry-date">
+          Expiry Date
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-payment-expiry-date"
+          type="month"
+          name="expiry-date"
+        />
+        <input required class="mb-3" type="submit" value="register" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong
+        ><br />register request [login as existing driver first] <br />request
+        will be assigned to currently logged in driver <br />to assign to
+        specific driver use the above driver login to login specific driver
+      </strong>
+      <form class="flex-col" id="register-form-request">
+        <label class="mb-3 mt-3" for="register-form-request-lot-uid">
+          Parking Lots
+        </label>
+        <select id="register-form-request-lot-uid" name="lot-uid">
+          <option value="">--Please choose an option--</option>
+        </select>
+        <label class="mb-3 mt-3" for="register-form-request-payment-uid">
+          Payment
+        </label>
+        <select id="register-form-request-payment-uid" name="payment-uid">
+          <option value="">--Please choose an option--</option>
+        </select>
+        <label class="mb-3 mt-3" for="register-form-request-start">
+          Start
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-request-start"
+          type="datetime-local"
+          name="start"
+        />
+        <label class="mb-3 mt-3" for="register-form-request-end"> End </label>
+        <input
+          required
+          class="mb-3"
+          id="register-form-request-end"
+          type="datetime-local"
+          name="end"
+        />
+        <input required class="mb-3" type="submit" value="send" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong
+        ><br />admin send message [login as admin first]<br />first click
+        "Please choose a person" this will load all drivers<br />message can be
+        sent to one or more drivers (hold shift and click)</strong
+      >
+      <form class="flex-col" id="send-form-message-admin">
+        <label class="mb-3 mt-3" for="send-form-message-admin-to-user-uid">
+          To
+        </label>
+        <select
+          id="send-form-message-admin-to-user-uid"
+          name="user-uid"
+          multiple
+        >
+          <option value="">--Please choose a person--</option>
+        </select>
+        <label class="mb-3 mt-3" for="send-form-message-admin-title">
+          Title
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="send-form-message-admin-title"
+          name="title"
+          type="text"
+        />
+        <label class="mb-3 mt-3" for="send-form-message-admin-content">
+          Message
+        </label>
+        <textarea
+          class="mb-3"
+          id="send-form-message-admin-content"
+          cols="30"
+          rows="5"
+          name="content"
+        ></textarea>
+        <input required class="mb-3" type="submit" value="send" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong
+        ><br />driver send message [login as existing driver first]<br />message
+        will be assigned to currently logged in driver <br />to assign to
+        specific driver use the above driver login to login specific
+        driver</strong
+      >
+      <form class="flex-col" id="send-form-message-driver">
+        <label class="mb-3 mt-3" for="send-form-message-driver-title">
+          Title
+        </label>
+        <input
+          required
+          class="mb-3"
+          id="send-form-message-driver-title"
+          name="title"
+          type="text"
+        />
+        <label class="mb-3 mt-3" for="send-form-message-driver-content">
+          Message
+        </label>
+        <textarea
+          class="mb-3"
+          id="send-form-message-driver-content"
+          cols="30"
+          rows="5"
+          name="content"
+        ></textarea>
+        <input required class="mb-3" type="submit" value="send" />
+      </form>
+
+      <hr />
+      <br /><br />
+      <!-- section -->
+      <strong><br />feedback buttons<br /></strong>
+      <div class="mb-3 mt-3">
+        <button onclick="PMS.getAdmins()">Get All Admins</button>
+        <button onclick="PMS.getDrivers()">Get All Drivers</button>
+        <button onclick="PMS.getLots()">Get All Lots</button>
+        <button onclick="PMS.getRequests()">Get All Requests</button>
+        <button onclick="PMS.getPayments()">Get All Payments</button>
+        <button onclick="PMS.getMessages()">Get All Messages</button>
+      </div>
+
+      <!-- helpers -->
+      <div id="busy-spinner" class="hidden"></div>
+      <div id="notification"></div>
+    </div>
+    <script type="module" src="script/pms.js"></script>
+    <script type="text/javascript" src="script/index.js" defer></script>
+  </body>
+</html>
