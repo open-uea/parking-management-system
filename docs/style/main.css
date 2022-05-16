@@ -1,15 +1,15 @@
-/* ---------- base styles ---------- */
+/* ----------- base styles ----------- */
 html,
 body {
   --content-width: min(85vw, 650px);
 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: #f2f2f2;
+  background-color: #A0AFB7;
 }
 body {
   display: flex;
@@ -23,49 +23,35 @@ body * {
 button,
 input[type="button"],
 input[type="submit"] {
-  white-space: nowrap;
-  text-transform: capitalize;
-  text-align: center;
-  outline: 0;
-  grid-gap: 8px;
-  align-items: center;
-  background: 0 0;
-  border: 1px solid #000;
-  border-radius: 4px;
-  cursor: pointer;
-  display: inline-flex;
-  flex-shrink: 0;
-  font-size: 16px;
-  gap: 8px;
-  justify-content: center;
-  line-height: 1.5;
-  overflow: hidden;
-  padding: 5px 10px;
-  text-decoration: none;
-  text-overflow: ellipsis;
-  transition: all 0.14s ease-out;
-  white-space: nowrap;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-size: 20px;
+  background-color: #5B6970;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-width: 0px;
+  border-radius: 8px;
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
 button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover {
-  box-shadow: 4px 4px 0 #000;
-  transform: translate(-4px, -4px);
-}
-button:focus-visible,
-input[type="button"]:focus-visible,
-input[type="submit"]:focus-visible {
-  outline-offset: 1px;
-}
+  box-shadow: 0 0 15px rgba(0,0,0,0.9);
+} 
 
 button:disabled,
 input[type="button"]:disabled,
 input[type="submit"]:disabled {
   cursor: not-allowed;
-  box-shadow: none;
   transform: none;
-  border: 1px solid rgba(16, 16, 16, 0.3);
+  color:rgb(44, 44, 44);
 }
 
 input[type="text"],
@@ -98,6 +84,50 @@ input[type="datetime-local"]:focus,
 select:focus {
   border-color: #3c4fe0;
   box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
+}
+
+.logo{
+  position:absolute;
+  top: 20px;
+  left:20px;
+  height: 75px;
+  width: 375px;
+}
+
+.form{
+  background-color: #718087;
+  color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+.headerText{
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: white;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.text{
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: white;
+  margin-bottom: 2;
+  text-transform: uppercase;
+}
+
+.noTransformText{
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: white;
+  margin-bottom: 2;
+}
+
+.homeButton{
+  margin-left: 950px;
+  margin-top: 65px;
 }
 
 /* ---------- utility styles ---------- */
@@ -202,10 +232,15 @@ select:focus {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: var(--content-width);
 }
 #action-form-admin-requests-selection input[type="checkbox"] {
   margin-bottom: 10px;
+}
+
+.action-btn-driver-ban-toggle{
+  padding: 2px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 #driver-management-section .content-injection {
@@ -304,12 +339,12 @@ select:focus {
 
 .register-request-absent-payment {
   display: inline-block;
-  border: solid 1px red;
-  background-color: #ff9696;
-  padding: 5px;
+  background-color: #db5151;
+  padding: 6px;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 15px;
   color: white;
+  text-align: center;
 }
 
 .upcoming-request-banner-injection {
@@ -325,9 +360,9 @@ select:focus {
 .navigate-btn-check-in:disabled,
 .navigate-btn-check-out:disabled,
 .upcoming-request-banner-injection-disabled {
-  color: gray;
-  background-color: lightgray;
-  border: solid 3px gray;
+  color: white;
+  background-color: #5B6970;
+  border: solid 0px gray;
 }
 .upcoming-request-banner-injection-disabled {
   border: solid 1px gray;
@@ -340,10 +375,10 @@ select:focus {
   font-size: 25px;
   font-weight: 700;
   background-color: white;
-  border: dashed 1px #cbc3c3;
   border-radius: 5px;
   height: 75px;
   text-align: center;
+  color: black;
 }
 
 #driver-request-history-tab .content-injection {
@@ -490,12 +525,14 @@ select:focus {
   top: 0;
   right: 0;
   margin: 15px;
-  color: #059;
-  background-color: #bef;
-  border: solid 1px #059;
+  background-color: #5B6970;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   padding: 7.5px 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   text-transform: capitalize;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: white;
 }
 
 .navigate-btn-admin-home,
@@ -510,32 +547,30 @@ select:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: black;
+  font-weight: 1000;
+  font-size: 24px;
   width: 50px;
   height: 75px;
   margin: 15px;
-  border: solid 2px black;
 }
 .grid-elem-spot-id[data-state="opened"],
 .spot-opened::before {
   background-color: springgreen;
-  box-shadow: none !important;
   transform: none !important;
 }
 .grid-elem-spot-id[data-state="occupied"],
 .spot-occupied::before {
   background-color: tomato;
-  box-shadow: none !important;
   transform: none !important;
 }
 .grid-elem-spot-id[data-state="reserved"],
 .spot-reserved::before {
   background-color: yellow;
-  box-shadow: none !important;
   transform: none !important;
 }
 .grid-elem-spot-id[data-selected="true"] {
-  border: solid 5px blueviolet;
-  box-shadow: none !important;
+  box-shadow: 0 0 15px rgb(0,0,0);
   transform: none !important;
 }
 
